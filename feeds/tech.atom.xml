@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Juzbox.com</title><link href="http://www.juzbox.com/" rel="alternate"></link><link href="http://www.juzbox.com/feeds/tech.atom.xml" rel="self"></link><id>http://www.juzbox.com/</id><updated>2016-05-04T00:00:00+09:00</updated><entry><title>OSX 日本語環境でUS配列キーボードを快適に使う</title><link href="http://www.juzbox.com/2016-05-04/us-kbd-on-osx/" rel="alternate"></link><published>2016-05-04T00:00:00+09:00</published><updated>2016-05-04T00:00:00+09:00</updated><author><name>Masahiro Kiyota</name></author><id>tag:www.juzbox.com,2016-05-04:2016-05-04/us-kbd-on-osx/</id><summary type="html">&lt;p&gt;OSXで修飾キーなどのキーバインドを変更する方法としては，&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;"System Preferences"の"Modifier keys"&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pqrs.org/osx/karabiner/seil.html.ja"&gt;Seil&lt;/a&gt; / &lt;a href="https://pqrs.org/osx/karabiner/index.html.ja"&gt;Karabiner&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;などがありますが，後者の方が圧倒的に柔軟です．ここでは，US104配列のキーボードでの僕の設定を備忘録としてメモしておきます．&lt;/p&gt;
+&lt;p&gt;僕は，下の表のようにリマップしています．（過去にWindowsを使っていた頃の癖が抜けず，コピーやペーストには左下のキーを使ってしまうので，CtrlをCommandにbindしています．）&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;変更前&lt;/th&gt;
+&lt;th&gt;変更後&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Caps Lock&lt;/td&gt;
+&lt;td&gt;Ctrl&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;lt. Ctrl&lt;/td&gt;
+&lt;td&gt;lt. Command&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;lt. Windows&lt;/td&gt;
+&lt;td&gt;lt. Option&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;lt. Alt&lt;/td&gt;
+&lt;td&gt;lt. Command&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rt. Alt&lt;/td&gt;
+&lt;td&gt;rt. Command&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rt. Windows&lt;/td&gt;
+&lt;td&gt;rt. Option&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Application&lt;/td&gt;
+&lt;td&gt;Fn&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;下の画像の通りSeil, Karabinerを設定することで，上記通りのマッピングに加えて，スペースキーの両脇のキーで日本語/英語入力切り替え，Fnキーとの同時押しでの輝度や音量の調節などが実現できました．
+（SeilでApplicationキーをFnにバインドすると，どうにもうまくFnとファンクションキーとの同時押しでの輝度等の調整ができなかったので，これだけKarabinerでリマップしています．）ご参考になれば幸いです．&lt;/p&gt;
+&lt;p&gt;&lt;img src="/static/seil.png" title=""Seil"" alt=""Seil"" class="fresco"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/static/karabiner.png" title=""Karabiner"" alt=""Karabiner"" class="fresco"&gt;&lt;/p&gt;</summary><category term="osx"></category><category term="memo"></category></entry><entry><title>Travis CIを使った自動build &amp; deploy</title><link href="http://www.juzbox.com/2014-11-12/automatic-build-and-deploy/" rel="alternate"></link><published>2014-11-12T00:00:00+09:00</published><updated>2014-11-12T00:00:00+09:00</updated><author><name>Masahiro Kiyota</name></author><id>tag:www.juzbox.com,2014-11-12:2014-11-12/automatic-build-and-deploy/</id><summary type="html">&lt;p&gt;&lt;img alt="Travis CI" src="http://www.juzbox.com/static/travis-mascot.png"&gt;&lt;/p&gt;
+&lt;p&gt;静的サイトジェネレータでは，記事を書いたあと，手元の環境でビルドし，それをデプロイするのが普通の手順ですが，継続的インテグレーション(CI)サービスを使うことで，ビルド &amp;amp; デプロイをCIサービス上で行うことができます．記事を書いて，そのソースをcommit, pushすれば，しばらくすると勝手にサイトが更新されているというわけです．素敵ですね．これなら出先など，自分のPCが使えない環境でも，blogを更新できますよ〜．&lt;/p&gt;
+&lt;p&gt;今回は，サイトのホストとしてGitHub Pagesを用い，CIはGitHubの公開リポジトリに対しては無料で利用できるTravis CIを用いました．GitHub Pagesは独自ドメインにも対応しており，staticなファイルのホストに限っていえば，とても良い選択肢に思えます．&lt;/p&gt;
+&lt;p&gt;PelicanのソースをGitHub上に載せておき，Travis CI上でPelicanを動かしてビルドし，それをGitHub pageのリポジトリ(username/username.github.ioなど)に自動でdeployさせるように設定します．ソースリポジトリにpushされると，CIがトリガされて勝手に走ります．&lt;/p&gt;
+&lt;p&gt;若干古い記事ですが，基本的には &lt;a href="http://zonca.github.io/2013/09/automatically-build-pelican-and-publish-to-github-pages.html"&gt;http://zonca.github.io/2013/09/automatically-build-pelican-and-publish-to-github-pages.html&lt;/a&gt; の手順通りでうまくいきました．&lt;/p&gt;
+&lt;p&gt;以下にいくつかの注意点をまとめておきます．&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当然ながら，&lt;code&gt;requirements.txt&lt;/code&gt;には適宜必要なパッケージを追加する&lt;/li&gt;
+&lt;li&gt;Pythonのバージョンを手元の環境と揃えておくと良い&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;make html&lt;/code&gt;とあるところを&lt;code&gt;make publish&lt;/code&gt;に変更した（これで&lt;code&gt;&lt;a href="http://publishconf.py"&gt;publishconf.py&lt;/a&gt;&lt;/code&gt;の設定も反映されるようになる）&lt;/li&gt;
+&lt;li&gt;GitHubのtokenはDeploy先リポジトリのownerでログインして，Settings→Applications→Generate new tokenで作成できる．deploy先が公開リポジトリなら，Scopeはpublic_repoにチェック．&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.travis.yml&lt;/code&gt;も公開リポジトリ上に置かれるので，Travisがdeployするのに使うtokenを，Travis CIが生成した鍵ペアの公開鍵で暗号化してやる必要がある．この鍵はrepository-specificなので（この鍵ペアがもし全ユーザーで共通だったら，他人の暗号を自分の設置した&lt;code&gt;.travis.yml&lt;/code&gt;に書いてTravisに復号させることで平文を得ることができてしまう！），&lt;code&gt;$ travis encrypt GH_TOKEN=TOKEN_FROM_GITHUB&lt;/code&gt;は生成元のソースリポジトリ（deploy先ではないよ）に移動して行う．&lt;/li&gt;
+&lt;li&gt;ソースリポジトリでsubmoduleのurlがgit@github.com:user/repo.gitの形式になっている場合，Travisからcheckoutできずエラーになってしまう．これが起きたら，&lt;code&gt;.travis.yml&lt;/code&gt;の&lt;code&gt;before_install&lt;/code&gt;に
+&lt;code&gt;- sed -i 's/git@github.com:/https:\/\/&lt;a href="http://github.com"&gt;github.com&lt;/a&gt;\//' .gitmodules&lt;/code&gt;
+を加えて，on-the-flyで置換してやればよい．&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;初めてCIを使ったのですが，ログを眺めていると，CIが走る度にクリーンな環境から環境構築（必要なpythonパッケージたちのインストールやソースリポジトリのcheckout）をするところから始めていて，計算機資源を&lt;del&gt;無駄に&lt;/del&gt;大変贅沢に使っている感がありました．CI上でのビルドからデプロイまでの一連の作業におおよそ2分半かかっていますが，そのうち2分以上はpythonパッケージのインストールに使われていました．なんだかなぁ．静的サイトジェネレータは地球にやさしいかと思っていましたが，CIを使った自動deployを組んだらむしろ無駄な計算機資源を食いつぶしていますね．そして，Travis CIさん，貴重な計算機資源をこんなどーでもいいブログに使ってしまいすみません．そしてマスコット（記事冒頭）がちょっと愛らしいですね．公開リポジトリなら無料で利用できるけれど，こんな大盤振る舞いしていて儲けが出せているのでしょうか．なんだかこちらが心配になってしまいます．なるべく無駄なpushは控えよう…．&lt;/p&gt;</summary><category term="travis"></category><category term="pelican"></category><category term="github"></category></entry><entry><title>Pelicanを使ったサイト構築手順</title><link href="http://www.juzbox.com/2014-11-11/pelican-setup/" rel="alternate"></link><published>2014-11-11T00:00:00+09:00</published><updated>2014-11-11T00:00:00+09:00</updated><author><name>Masahiro Kiyota</name></author><id>tag:www.juzbox.com,2014-11-11:2014-11-11/pelican-setup/</id><summary type="html">&lt;p&gt;Pelicanでblogを構築しようなんて考えるのはたいていpython使いでしょうから，こんな記事を書いてもどうするんだ，とも思いますが，自分用の備忘録も込めて，Pelicanでのblog構築の手順を簡単にまとめておきます．環境はOSX 10.10 + Homebrewで入れたPython 3.4.2 + Pelican 3.5です．&lt;/p&gt;
+&lt;h1 id="_1"&gt;インストール&lt;/h1&gt;
+&lt;p&gt;インストールは &lt;a href="http://docs.getpelican.com/en/3.5.0/install.html"&gt;http://docs.getpelican.com/en/3.5.0/install.html&lt;/a&gt; に従えばいい感じです．&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pip install pelican Markdown typogrify BeautifulSoup4
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;bs4は，僕が今回使ったElegantというテーマで必要なもので，テーマによっては不要です．ちなみに，テーマを管理する&lt;code&gt;pelican-themes&lt;/code&gt;コマンドがsite-packagesにテーマをぶち込んだりしているのを見るにつけ，pelicanの開発者たちはvirtualenvを使うことを前提にしている感があるので，素直にvirtualenvの中でやるのが無難そうです．&lt;/p&gt;
+&lt;h1 id="_2"&gt;ひな形の作成&lt;/h1&gt;
+&lt;p&gt;インストールが終わったら，適当なディレクトリを掘って&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pelican-quickstart
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;で質問に答えていくとscaffoldを作ってくれます．これが終わった時点でgitのリポジトリを作っておくと良さそうです．&lt;/p&gt;
+&lt;h1 id="_3"&gt;設定・プラグイン・テーマ&lt;/h1&gt;
+&lt;p&gt;設定は基本的に&lt;code&gt;&lt;a href="http://pelicanconf.py"&gt;pelicanconf.py&lt;/a&gt;&lt;/code&gt;に記述していきます．こいつは単なるpythonファイルなので，当然ですがもし中でいろいろやりたければ，好き放題にいろいろできます．また，テーマとプラグインを使えるようにしておきましょう．テーマについては，&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;THEME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;themes/pelican-elegant&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;のように，&lt;code&gt;&lt;a href="http://pelicanconf.py"&gt;pelicanconf.py&lt;/a&gt;&lt;/code&gt;からの相対パスでテーマの場所を記述します．（上述した&lt;code&gt;pelican-theme&lt;/code&gt;というコマンドもありますが，使う必要は全くありません．）
+プラグインについては，&lt;code&gt;PLUGIN_PATH&lt;/code&gt;にプラグインたちが入ったディレクトリを指定し，&lt;code&gt;PLUGINS&lt;/code&gt;にプラグイン名文字列のリストを指定します．
+githubにpelican公式の&lt;a href="https://github.com/getpelican/pelican-themes"&gt;pelican-themes&lt;/a&gt;, &lt;a href="https://github.com/getpelican/pelican-plugins"&gt;pelican-plugins&lt;/a&gt;というリポジトリがあって，そこに多くのテーマやプラグインが集められています．&lt;/p&gt;
+&lt;p&gt;僕はテーマはどのみち自分が決めたものしか使わないので，ベースフォルダの下にthemesというフォルダを作って，その中に自分が使いたいテーマだけを&lt;code&gt;git submodule add&lt;/code&gt;し，プラグインについては何を使いたくなるかわからないと思ったのでpelican-pluginsリポジトリをplugins以下に&lt;code&gt;git submodule add&lt;/code&gt;することにしました．&lt;/p&gt;
+&lt;h2 id="elegant"&gt;Elegant&lt;/h2&gt;
+&lt;p&gt;テーマは，&lt;a href="https://github.com/talha131/pelican-elegant"&gt;Elegant&lt;/a&gt;というのを使うことにしました．見た目がすっきりしていて，responsiveであり，また，機能も豊富な感じで気に入りました．設定方法は， &lt;a href="http://oncrashreboot.com/elegant-best-pelican-theme-features"&gt;作者のブログ&lt;/a&gt; に書かれています．&lt;/p&gt;
+&lt;p&gt;上の説明をよく読むとちゃんと書いてあるのですが，トップページに表示する自己紹介は，&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;LANDING_PAGE_ABOUT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;I&lt;/span&gt;&lt;span class="se"&gt;\&amp;#39;&lt;/span&gt;&lt;span class="s1"&gt;m a firecracker&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;details&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;lt;h1&amp;gt;Bang!&amp;lt;/h1&amp;gt;&amp;#39;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;などと書くとそれが表示されます（htmlタグもそのまま書けるようです）．&lt;/p&gt;
+&lt;h1 id="_4"&gt;記事を書く&lt;/h1&gt;
+&lt;p&gt;マークアップ言語としてはMarkdown, reStructuredText, htmlが使えますが，僕はMarkdownを使うことにしました．ファイル冒頭に以下の様な感じでメタデータを書いておきます．Titleは必須の属性で，ないとコンパイル時に怒られます．&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Title&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;鳥類の体の構造&lt;/span&gt;
+&lt;span class="n"&gt;Category&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;misc&lt;/span&gt;
+&lt;span class="n"&gt;Tags&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sparrow&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;duck&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;palicanconf.pyに&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;FILENAME_METADATA&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;(?P&amp;lt;date&amp;gt;\d{4}-\d{2}-\d{2})_(?P&amp;lt;slug&amp;gt;.*)&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;と書いておくと，&lt;code&gt;&lt;a href="http://2014-11-11_my-great-post.md"&gt;2014-11-11_my-great-post.md&lt;/a&gt;&lt;/code&gt;というファイル名があったときに，そこからdateとslugのメタデータを抽出してくれます．&lt;/p&gt;
+&lt;h1 id="_5"&gt;最後に&lt;/h1&gt;
+&lt;p&gt;このblogの生成元になっているソースを&lt;a href="https://github.com/juzbox-dot-com/juzbox-dot-com.github.io-source"&gt;githubのリポジトリ&lt;/a&gt;に載せてあるので，もし必要があれば参照してください．また， &lt;a href="https://github.com/getpelican/pelican/wiki/Powered-by-Pelican"&gt;https://github.com/getpelican/pelican/wiki/Powered-by-Pelican&lt;/a&gt; にPelicanを使っているサイトとそのソースが紹介されています．あの &lt;a href="http://kernel.org"&gt;kernel.org&lt;/a&gt; も実はPelicanを使っていたのですね．&lt;/p&gt;
+&lt;p&gt;それでは，皆様もPelicanで楽しいblogライフをお過ごしください！&lt;/p&gt;</summary><category term="pelican"></category></entry></feed>

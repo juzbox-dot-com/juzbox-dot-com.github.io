@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Masahiro Kiyota" />
+        <meta name="copyright" content="Masahiro Kiyota" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="pelican, tech, " />
+
+<meta property="og:title" content="Pelicanを使ったサイト構築手順 "/>
+<meta property="og:url" content="http://www.juzbox.com/2014-11-11/pelican-setup/" />
+<meta property="og:description" content="Pelicanでblogを構築しようなんて考えるのはたいていpython使いでしょうから，こんな記事を書いてもどうするんだ，とも思いますが，自分用の備忘録も込めて，Pelicanでのblog構築の手順を簡単にまとめておきます．環境はOSX 10.10 + Homebrewで入れたPython 3.4.2 + Pelican 3.5です． インストール インストールは http://docs.getpelican.com/en/3.5.0/install.html に従えばいい感じです． $ pip install pelican Markdown typogrify BeautifulSoup4 bs4は，僕が今回使ったElegantというテーマで必要なもので，テーマによっては不要です．ちなみに，テーマを管理するpelican-themesコマンドがsite-packagesにテーマをぶち込んだりしているのを見るにつけ，pelicanの開発者たちはvirtualenvを使うことを前提にしている感があるので，素直にvirtualenvの中でやるのが無難そうです． ひな形の作成 インストールが終わったら，適当なディレクトリを掘って $ pelican-quickstart で質問に答えていくとscaffoldを作ってくれます．これが終わった時点でgitのリポジトリを作っておくと良さそうです． 設定 ..." />
+<meta property="og:site_name" content="Juzbox.com" />
+<meta property="og:article:author" content="Masahiro Kiyota" />
+<meta property="og:article:published_time" content="2014-11-11T00:00:00+09:00" />
+<meta name="twitter:title" content="Pelicanを使ったサイト構築手順 ">
+<meta name="twitter:description" content="Pelicanでblogを構築しようなんて考えるのはたいていpython使いでしょうから，こんな記事を書いてもどうするんだ，とも思いますが，自分用の備忘録も込めて，Pelicanでのblog構築の手順を簡単にまとめておきます．環境はOSX 10.10 + Homebrewで入れたPython 3.4.2 + Pelican 3.5です． インストール インストールは http://docs.getpelican.com/en/3.5.0/install.html に従えばいい感じです． $ pip install pelican Markdown typogrify BeautifulSoup4 bs4は，僕が今回使ったElegantというテーマで必要なもので，テーマによっては不要です．ちなみに，テーマを管理するpelican-themesコマンドがsite-packagesにテーマをぶち込んだりしているのを見るにつけ，pelicanの開発者たちはvirtualenvを使うことを前提にしている感があるので，素直にvirtualenvの中でやるのが無難そうです． ひな形の作成 インストールが終わったら，適当なディレクトリを掘って $ pelican-quickstart で質問に答えていくとscaffoldを作ってくれます．これが終わった時点でgitのリポジトリを作っておくと良さそうです． 設定 ...">
+
+        <title>Pelicanを使ったサイト構築手順  · Juzbox.com
+</title>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://www.juzbox.com/theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://www.juzbox.com/theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://www.juzbox.com/theme/fresco/fresco.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://www.juzbox.com/theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://www.juzbox.com/theme/css/custom.css" media="screen">
+        <link href="http://www.juzbox.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Juzbox.com - Full Atom Feed" />
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-56630010-1', 'auto');
+    ga('send', 'pageview');
+</script>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://www.juzbox.com/"><span class=site-name>Juzbox.com</span></a>
+            </div>
+                    <div class="navbar-collapse collapse" id="navbar-collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li ><a href="http://www.juzbox.com">Home</a></li>
+                            <li ><a href="http://www.juzbox.com/notes/">Notes</a></li>
+                            <li ><a href="http://www.juzbox.com/projects/">Projects</a></li>
+                            <li ><a href="http://www.juzbox.com/categories.html">Categories</a></li>
+                            <li ><a href="http://www.juzbox.com/tags.html">Tags</a></li>
+                            <li ><a href="http://www.juzbox.com/archives.html">Archives</a></li>
+                        </ul>
+                        <form class="navbar-form navbar-right" role="search" action="http://www.juzbox.com/search.html" onsubmit="return validateForm(this.elements['q'].value);">
+                            <div class="form-group">
+                                <input type="text" class="form-control search-query" placeholder="Search" id="tipue_search_input" name="q">
+                            </div>
+                        </form>
+                    </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+<article>
+<div class="row">
+    <div class="col-md-10 col-md-offset-2">
+    <header class="page-header">
+    <h1><a href="http://www.juzbox.com/2014-11-11/pelican-setup/"> Pelicanを使ったサイト構築手順  </a></h1>
+    </header>
+    </div>
+</div>
+
+<div class="row">
+        <div class="col-md-8 col-md-offset-2 article-content">
+
+            
+            <p>Pelicanでblogを構築しようなんて考えるのはたいていpython使いでしょうから，こんな記事を書いてもどうするんだ，とも思いますが，自分用の備忘録も込めて，Pelicanでのblog構築の手順を簡単にまとめておきます．環境はOSX 10.10 + Homebrewで入れたPython 3.4.2 + Pelican 3.5です．</p>
+<h1 id="_1">インストール</h1>
+<p>インストールは <a href="http://docs.getpelican.com/en/3.5.0/install.html">http://docs.getpelican.com/en/3.5.0/install.html</a> に従えばいい感じです．</p>
+<div class="highlight"><pre><span></span>$ pip install pelican Markdown typogrify BeautifulSoup4
+</pre></div>
+
+
+<p>bs4は，僕が今回使ったElegantというテーマで必要なもので，テーマによっては不要です．ちなみに，テーマを管理する<code>pelican-themes</code>コマンドがsite-packagesにテーマをぶち込んだりしているのを見るにつけ，pelicanの開発者たちはvirtualenvを使うことを前提にしている感があるので，素直にvirtualenvの中でやるのが無難そうです．</p>
+<h1 id="_2">ひな形の作成</h1>
+<p>インストールが終わったら，適当なディレクトリを掘って</p>
+<div class="highlight"><pre><span></span>$ pelican-quickstart
+</pre></div>
+
+
+<p>で質問に答えていくとscaffoldを作ってくれます．これが終わった時点でgitのリポジトリを作っておくと良さそうです．</p>
+<h1 id="_3">設定・プラグイン・テーマ</h1>
+<p>設定は基本的に<code><a href="http://pelicanconf.py">pelicanconf.py</a></code>に記述していきます．こいつは単なるpythonファイルなので，当然ですがもし中でいろいろやりたければ，好き放題にいろいろできます．また，テーマとプラグインを使えるようにしておきましょう．テーマについては，</p>
+<div class="highlight"><pre><span></span><span class="n">THEME</span> <span class="o">=</span> <span class="s1">&#39;themes/pelican-elegant&#39;</span>
+</pre></div>
+
+
+<p>のように，<code><a href="http://pelicanconf.py">pelicanconf.py</a></code>からの相対パスでテーマの場所を記述します．（上述した<code>pelican-theme</code>というコマンドもありますが，使う必要は全くありません．）
+プラグインについては，<code>PLUGIN_PATH</code>にプラグインたちが入ったディレクトリを指定し，<code>PLUGINS</code>にプラグイン名文字列のリストを指定します．
+githubにpelican公式の<a href="https://github.com/getpelican/pelican-themes">pelican-themes</a>, <a href="https://github.com/getpelican/pelican-plugins">pelican-plugins</a>というリポジトリがあって，そこに多くのテーマやプラグインが集められています．</p>
+<p>僕はテーマはどのみち自分が決めたものしか使わないので，ベースフォルダの下にthemesというフォルダを作って，その中に自分が使いたいテーマだけを<code>git submodule add</code>し，プラグインについては何を使いたくなるかわからないと思ったのでpelican-pluginsリポジトリをplugins以下に<code>git submodule add</code>することにしました．</p>
+<h2 id="elegant">Elegant</h2>
+<p>テーマは，<a href="https://github.com/talha131/pelican-elegant">Elegant</a>というのを使うことにしました．見た目がすっきりしていて，responsiveであり，また，機能も豊富な感じで気に入りました．設定方法は， <a href="http://oncrashreboot.com/elegant-best-pelican-theme-features">作者のブログ</a> に書かれています．</p>
+<p>上の説明をよく読むとちゃんと書いてあるのですが，トップページに表示する自己紹介は，</p>
+<div class="highlight"><pre><span></span><span class="n">LANDING_PAGE_ABOUT</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;I</span><span class="se">\&#39;</span><span class="s1">m a firecracker&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;details&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;h1&gt;Bang!&lt;/h1&gt;&#39;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>などと書くとそれが表示されます（htmlタグもそのまま書けるようです）．</p>
+<h1 id="_4">記事を書く</h1>
+<p>マークアップ言語としてはMarkdown, reStructuredText, htmlが使えますが，僕はMarkdownを使うことにしました．ファイル冒頭に以下の様な感じでメタデータを書いておきます．Titleは必須の属性で，ないとコンパイル時に怒られます．</p>
+<div class="highlight"><pre><span></span><span class="n">Title</span><span class="o">:</span> <span class="err">鳥類の体の構造</span>
+<span class="n">Category</span><span class="o">:</span> <span class="n">misc</span>
+<span class="n">Tags</span><span class="o">:</span> <span class="n">pelican</span><span class="o">,</span> <span class="n">sparrow</span><span class="o">,</span> <span class="n">duck</span>
+</pre></div>
+
+
+<p>palicanconf.pyに</p>
+<div class="highlight"><pre><span></span><span class="n">FILENAME_METADATA</span> <span class="o">=</span> <span class="s1">&#39;(?P&lt;date&gt;\d{4}-\d{2}-\d{2})_(?P&lt;slug&gt;.*)&#39;</span>
+</pre></div>
+
+
+<p>と書いておくと，<code><a href="http://2014-11-11_my-great-post.md">2014-11-11_my-great-post.md</a></code>というファイル名があったときに，そこからdateとslugのメタデータを抽出してくれます．</p>
+<h1 id="_5">最後に</h1>
+<p>このblogの生成元になっているソースを<a href="https://github.com/juzbox-dot-com/juzbox-dot-com.github.io-source">githubのリポジトリ</a>に載せてあるので，もし必要があれば参照してください．また， <a href="https://github.com/getpelican/pelican/wiki/Powered-by-Pelican">https://github.com/getpelican/pelican/wiki/Powered-by-Pelican</a> にPelicanを使っているサイトとそのソースが紹介されています．あの <a href="http://kernel.org">kernel.org</a> も実はPelicanを使っていたのですね．</p>
+<p>それでは，皆様もPelicanで楽しいblogライフをお過ごしください！</p>
+            
+            <section>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://www.juzbox.com/2014-11-11/pelican-setup/#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'juzbox-dot-com';
+        var disqus_identifier = 'http://www.juzbox.com/2014-11-11/pelican-setup/';
+    var disqus_url = 'http://www.juzbox.com/2014-11-11/pelican-setup/';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+        </div>
+        <section>
+        <div class="col-md-2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2014-11-11T00:00:00+09:00">Nov 11, 2014</time>
+            <h4>Category</h4>
+            <a class="category-link" href="http://www.juzbox.com/categories.html#tech-ref">tech</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="http://www.juzbox.com/tags.html#pelican-ref">pelican
+                    <span>3</span>
+</a></li>
+            </ul>
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme based on <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a>.</li>
+    </ul>
+</div>
+</footer>            <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="http://www.juzbox.com/theme/fresco/fresco.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+            $(function() {
+                $('.article-content table').addClass('table table-striped');
+                $('.article-content img').addClass('img-responsive');
+                $('.article-content img.fresco').each(function() {
+                    $this = $(this);
+                    var $a = $('<a></a>');
+                    $a.attr('href', $this.attr('src'));
+                    $a.addClass('fresco');
+                    $this.wrap($a);
+                })
+            });
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'juzbox-dot-com';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementsByClassName('accordion-toggle');
+    var old_innerHTML = link[0].innerHTML;
+    $(link[0]).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link[0]).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>

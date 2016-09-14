@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Masahiro Kiyota" />
+        <meta name="copyright" content="Masahiro Kiyota" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="osx, memo, tech, " />
+
+<meta property="og:title" content="OSX 日本語環境でUS配列キーボードを快適に使う "/>
+<meta property="og:url" content="http://www.juzbox.com/2016-05-04/us-kbd-on-osx/" />
+<meta property="og:description" content="OSXで修飾キーなどのキーバインドを変更する方法としては， &#34;System Preferences&#34;の&#34;Modifier keys&#34; Seil / Karabiner などがありますが，後者の方が圧倒的に柔軟です．ここでは，US104配列のキーボードでの僕の設定を備忘録としてメモしておきます． 僕は，下の表のようにリマップしています．（過去にWindowsを使っていた頃の癖が抜けず，コピーやペーストには左下のキーを使ってしまうので，CtrlをCommandにbindしています．） 変更前 変更後 Caps Lock Ctrl lt. Ctrl lt. Command lt. Windows lt. Option lt. Alt lt. Command rt. Alt rt. Command rt. Windows rt. Option Application Fn 下の画像の通りSeil, Karabinerを設定することで，上記通りのマッピングに加えて，スペースキーの両脇のキーで日本語/英語入力切り替え，Fnキーとの同時押しでの輝度や音量の調節などが実現できました ..." />
+<meta property="og:site_name" content="Juzbox.com" />
+<meta property="og:article:author" content="Masahiro Kiyota" />
+<meta property="og:article:published_time" content="2016-05-04T00:00:00+09:00" />
+<meta name="twitter:title" content="OSX 日本語環境でUS配列キーボードを快適に使う ">
+<meta name="twitter:description" content="OSXで修飾キーなどのキーバインドを変更する方法としては， &#34;System Preferences&#34;の&#34;Modifier keys&#34; Seil / Karabiner などがありますが，後者の方が圧倒的に柔軟です．ここでは，US104配列のキーボードでの僕の設定を備忘録としてメモしておきます． 僕は，下の表のようにリマップしています．（過去にWindowsを使っていた頃の癖が抜けず，コピーやペーストには左下のキーを使ってしまうので，CtrlをCommandにbindしています．） 変更前 変更後 Caps Lock Ctrl lt. Ctrl lt. Command lt. Windows lt. Option lt. Alt lt. Command rt. Alt rt. Command rt. Windows rt. Option Application Fn 下の画像の通りSeil, Karabinerを設定することで，上記通りのマッピングに加えて，スペースキーの両脇のキーで日本語/英語入力切り替え，Fnキーとの同時押しでの輝度や音量の調節などが実現できました ...">
+
+        <title>OSX 日本語環境でUS配列キーボードを快適に使う  · Juzbox.com
+</title>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://www.juzbox.com/theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://www.juzbox.com/theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://www.juzbox.com/theme/fresco/fresco.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://www.juzbox.com/theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://www.juzbox.com/theme/css/custom.css" media="screen">
+        <link href="http://www.juzbox.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Juzbox.com - Full Atom Feed" />
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-56630010-1', 'auto');
+    ga('send', 'pageview');
+</script>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://www.juzbox.com/"><span class=site-name>Juzbox.com</span></a>
+            </div>
+                    <div class="navbar-collapse collapse" id="navbar-collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li ><a href="http://www.juzbox.com">Home</a></li>
+                            <li ><a href="http://www.juzbox.com/notes/">Notes</a></li>
+                            <li ><a href="http://www.juzbox.com/projects/">Projects</a></li>
+                            <li ><a href="http://www.juzbox.com/categories.html">Categories</a></li>
+                            <li ><a href="http://www.juzbox.com/tags.html">Tags</a></li>
+                            <li ><a href="http://www.juzbox.com/archives.html">Archives</a></li>
+                        </ul>
+                        <form class="navbar-form navbar-right" role="search" action="http://www.juzbox.com/search.html" onsubmit="return validateForm(this.elements['q'].value);">
+                            <div class="form-group">
+                                <input type="text" class="form-control search-query" placeholder="Search" id="tipue_search_input" name="q">
+                            </div>
+                        </form>
+                    </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+<article>
+<div class="row">
+    <div class="col-md-10 col-md-offset-2">
+    <header class="page-header">
+    <h1><a href="http://www.juzbox.com/2016-05-04/us-kbd-on-osx/"> OSX 日本語環境でUS配列キーボードを快適に使う  </a></h1>
+    </header>
+    </div>
+</div>
+
+<div class="row">
+        <div class="col-md-8 col-md-offset-2 article-content">
+
+            
+            <p>OSXで修飾キーなどのキーバインドを変更する方法としては，</p>
+<ul>
+<li>"System Preferences"の"Modifier keys"</li>
+<li><a href="https://pqrs.org/osx/karabiner/seil.html.ja">Seil</a> / <a href="https://pqrs.org/osx/karabiner/index.html.ja">Karabiner</a></li>
+</ul>
+<p>などがありますが，後者の方が圧倒的に柔軟です．ここでは，US104配列のキーボードでの僕の設定を備忘録としてメモしておきます．</p>
+<p>僕は，下の表のようにリマップしています．（過去にWindowsを使っていた頃の癖が抜けず，コピーやペーストには左下のキーを使ってしまうので，CtrlをCommandにbindしています．）</p>
+<table>
+<thead>
+<tr>
+<th>変更前</th>
+<th>変更後</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Caps Lock</td>
+<td>Ctrl</td>
+</tr>
+<tr>
+<td>lt. Ctrl</td>
+<td>lt. Command</td>
+</tr>
+<tr>
+<td>lt. Windows</td>
+<td>lt. Option</td>
+</tr>
+<tr>
+<td>lt. Alt</td>
+<td>lt. Command</td>
+</tr>
+<tr>
+<td>rt. Alt</td>
+<td>rt. Command</td>
+</tr>
+<tr>
+<td>rt. Windows</td>
+<td>rt. Option</td>
+</tr>
+<tr>
+<td>Application</td>
+<td>Fn</td>
+</tr>
+</tbody>
+</table>
+<p>下の画像の通りSeil, Karabinerを設定することで，上記通りのマッピングに加えて，スペースキーの両脇のキーで日本語/英語入力切り替え，Fnキーとの同時押しでの輝度や音量の調節などが実現できました．
+（SeilでApplicationキーをFnにバインドすると，どうにもうまくFnとファンクションキーとの同時押しでの輝度等の調整ができなかったので，これだけKarabinerでリマップしています．）ご参考になれば幸いです．</p>
+<p><img src="/static/seil.png" title=""Seil"" alt=""Seil"" class="fresco"></p>
+<p><img src="/static/karabiner.png" title=""Karabiner"" alt=""Karabiner"" class="fresco"></p>
+            
+            <section>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://www.juzbox.com/2016-05-04/us-kbd-on-osx/#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'juzbox-dot-com';
+        var disqus_identifier = 'http://www.juzbox.com/2016-05-04/us-kbd-on-osx/';
+    var disqus_url = 'http://www.juzbox.com/2016-05-04/us-kbd-on-osx/';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+        </div>
+        <section>
+        <div class="col-md-2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2016-05-04T00:00:00+09:00">May 4, 2016</time>
+            <h4>Category</h4>
+            <a class="category-link" href="http://www.juzbox.com/categories.html#tech-ref">tech</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="http://www.juzbox.com/tags.html#memo-ref">memo
+                    <span>1</span>
+</a></li>
+                <li><a href="http://www.juzbox.com/tags.html#osx-ref">osx
+                    <span>1</span>
+</a></li>
+            </ul>
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme based on <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a>.</li>
+    </ul>
+</div>
+</footer>            <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="http://www.juzbox.com/theme/fresco/fresco.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+            $(function() {
+                $('.article-content table').addClass('table table-striped');
+                $('.article-content img').addClass('img-responsive');
+                $('.article-content img.fresco').each(function() {
+                    $this = $(this);
+                    var $a = $('<a></a>');
+                    $a.attr('href', $this.attr('src'));
+                    $a.addClass('fresco');
+                    $this.wrap($a);
+                })
+            });
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'juzbox-dot-com';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementsByClassName('accordion-toggle');
+    var old_innerHTML = link[0].innerHTML;
+    $(link[0]).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link[0]).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>
